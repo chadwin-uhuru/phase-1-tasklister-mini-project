@@ -3,25 +3,17 @@ document.addEventListener("DOMContentLoaded", () => {
   const taskList = document.getElementById("tasks");
 
   form.addEventListener("submit", function (event) {
-    event.preventDefault(); // Prevent the page from reloading
+    event.preventDefault(); // 🛑 Prevent form from refreshing the page
 
-    const input = document.getElementById("new-task-description");
-    const taskText = input.value;
+    const taskInput = document.getElementById("new-task-description");
+    const task = taskInput.value;
 
-    if (taskText.trim() !== "") {
-      const li = document.createElement("li");
-      li.textContent = taskText;
+    if (task.trim() !== "") {
+      const newTask = document.createElement("li");
+      newTask.textContent = task;
 
-      const deleteBtn = document.createElement("button");
-      deleteBtn.textContent = "X";
-      deleteBtn.addEventListener("click", () => {
-        li.remove(); // Remove the task when you click the delete button
-            });
-
-      li.appendChild(deleteBtn);
-      taskList.appendChild(li);
-
-      input.value = ""; // Clear the input field after submitting
+      taskList.appendChild(newTask); // ✅ Add task to the DOM
+      taskInput.value = ""; // Clear input after adding
     }
   });
 });
