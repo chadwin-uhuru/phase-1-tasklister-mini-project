@@ -1,36 +1,27 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // your code here
+  const form = document.getElementById("create-task-form");
+  const taskList = document.getElementById("tasks");
+
+  form.addEventListener("submit", function (event) {
+    event.preventDefault(); // Prevent the page from reloading
+
+    const input = document.getElementById("new-task-description");
+    const taskText = input.value;
+
+    if (taskText.trim() !== "") {
+      const li = document.createElement("li");
+      li.textContent = taskText;
+
+      const deleteBtn = document.createElement("button");
+      deleteBtn.textContent = "X";
+      deleteBtn.addEventListener("click", () => {
+        li.remove(); // Remove the task when you click the delete button
+            });
+
+      li.appendChild(deleteBtn);
+      taskList.appendChild(li);
+
+      input.value = ""; // Clear the input field after submitting
+    }
+  });
 });
-
-document.addEventListener("DOMContentLoaded", () => {
-  const form = document.getElementById('create-task-form');
-  form.addEventListener('submit', handleSubmit);
-});
-
-function handleSubmit(event) {
-  event.preventDefault();
-  const inputField = document.getElementById('new-task-description');
-  const task = inputField.value.trim();
-
-  if (task) {
-    // Add the task to the list
-    addTaskToList(task);
-  }
-
-  // Reset the input field
-  inputField.value = '';
-}
-
-function addTaskToList(task) {
-  const ul = document.getElementById('tasks'); // Target the <ul> where tasks will be listed
-  const li = document.createElement('li');
-  li.textContent = task;
-
-  // Optionally add a delete button to each task
-  const deleteButton = document.createElement('button');
-  deleteButton.textContent = 'Delete';
-  deleteButton.onclick = () => li.remove();
-  li.appendChild(deleteButton);
-
-  ul.appendChild(li);
-}
